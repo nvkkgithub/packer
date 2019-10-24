@@ -1,0 +1,11 @@
+{
+    "aws_access_key": "*********",
+    "aws_secret_key": "*********",
+    "aws_ami_name": "jenkins-slave-rhel-{{timestamp}}",
+    "aws_ami_id": "ami-0520e698dd500b1d1",
+    "aws_instance_type": "t2.micro",
+    "aws_region": "us-east-2",
+    "aws_ami_username": "ec2-user",
+    "aws_builder_type": "amazon-ebs",
+    "remote_tmp_folder": "/tmp/remotefiles"
+}

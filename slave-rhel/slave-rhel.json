@@ -1,0 +1,45 @@
+{
+    "builders": [
+        {
+            "access_key": "{{user `aws_access_key`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "ami_name": "{{user `aws_ami_name`}}",
+            "region": "{{user `aws_region`}}",
+            "source_ami": "{{user `aws_ami_id`}}",
+            "instance_type": "{{user `aws_instance_type`}}",
+            "ssh_username": "{{user `aws_ami_username`}}",
+            "type": "amazon-ebs",
+            "associate_public_ip_address" : true
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "./slave-rhel.provisioners-pre.sh"
+        },
+        {
+            "type": "file",
+            "source": "./resources/slave-register.sh",
+            "destination": "{{user `remote_tmp_folder`}}/slave-register.sh"
+        },
+        {
+            "type": "file",
+            "source": "./resources/rhel-jenkins-slave.service",
+            "destination": "{{user `remote_tmp_folder`}}/rhel-jenkins-slave.service"
+        },
+        {
+            "type": "file",
+            "source": "./resources/jenkins-slave-auto-register.sh",
+            "destination": "{{user `remote_tmp_folder`}}/jenkins-slave-auto-register.sh"
+        },
+        {
+            "type": "file",
+            "source": "./resources/maven.sh",
+            "destination": "{{user `remote_tmp_folder`}}/maven.sh"
+        },
+        {
+            "type": "shell",
+            "script": "./slave-rhel.provisioners.sh"
+        }
+    ]
+}

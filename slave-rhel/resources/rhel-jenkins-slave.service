@@ -1,0 +1,17 @@
+[Unit]
+Description=Register RHEL slave with Jenkins Master
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=ec2-user
+Group=ec2-user
+PermissionsStartOnly=true
+ExecStart=/bin/nohup /var/jenkins/slave-register.sh
+StandardOutput=syslog
+TimeoutStartSec=15
+Restart=always
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
